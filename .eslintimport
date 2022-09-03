@@ -1,0 +1,35 @@
+{
+	"plugins": ["import-helpers"],
+	"rules": {
+		"import-helpers/order-imports": [
+			"error",
+			{
+				"newlinesBetween": "always",
+				"groups": [
+					["/^react$/", "/^react-dom/", "/^react-router-dom/"],
+          "/styled-components/",
+          "module",
+          "/services/",
+          "/contexts/",
+          "/reducers/",
+          "/store/",
+          "/^hooks/",
+          "/layouts/",
+          "/pages/",
+          "/^components/",
+          "/utils/",
+          "/data/",
+          "/assets/",
+          "/^types|^@types/",
+          "/^styles/",
+          ["parent", "sibling", "index"],
+          "/^./styles/"
+				],
+				"alphabetize": {
+					"order": "asc",
+					"ignoreCase": true
+				}
+			}
+		]
+	}
+}
