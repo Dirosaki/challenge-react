@@ -1,8 +1,12 @@
+import { useCart } from 'hooks/useCart'
+
 import cartIcon from 'assets/icons/cartIcon.svg'
 
 import * as Styled from './styles'
 
 export function Header() {
+	const { quantityMoviesInCart } = useCart()
+
 	return (
 		<Styled.Header>
 			<Styled.Logo to="/">
@@ -11,7 +15,7 @@ export function Header() {
 			<Styled.Cart to="/carrinho">
 				<div>
 					<strong>Meu Carrinho</strong>
-					<span>0 itens</span>
+					<span>{quantityMoviesInCart} itens</span>
 				</div>
 				<img src={cartIcon} alt="" />
 			</Styled.Cart>
