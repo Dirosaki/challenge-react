@@ -14,7 +14,13 @@ import * as Styled from './styles'
 export function Cart() {
 	const navigate = useNavigate()
 
-	const { moviesInCart, quantityMoviesInCart, totalPrice } = useCart()
+	const { moviesInCart, quantityMoviesInCart, totalPrice, clearCart } =
+		useCart()
+
+	function handleCheckout() {
+		navigate('/compra-realizada')
+		clearCart()
+	}
 
 	return (
 		<Styled.Container>
@@ -29,7 +35,7 @@ export function Cart() {
 						<MovieCardForCart key={movie.id} movie={movie} />
 					))}
 					<Styled.Footer>
-						<Button type="button" onClick={() => navigate('/compra-realizada')}>
+						<Button type="button" onClick={handleCheckout}>
 							Finalizar pedido
 						</Button>
 						<strong>
