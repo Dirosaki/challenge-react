@@ -15,6 +15,10 @@ type CartContextType = {
 	quantityMoviesInCart: number
 	addMovieToCart: (newMovie: MovieProps) => void
 	removeMovieFromCart: (movieId: number) => void
+	increaseMovieQuantityById: (movieId: number) => void
+	decreaseMovieQuantityById: (movieId: number) => void
+	changeMovieQuantityById: (movieId: number, newQuantity: number) => void
+	clearCart: () => void
 }
 
 type CartContextProviderProps = {
@@ -74,6 +78,48 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 		)
 	}, [])
 
+	const increaseMovieQuantityById = useCallback((movieId: number) => {
+		setMoviesInCart((prevState) =>
+			prevState.map((movie) => {
+				if (movie.id === movieId && movie.quantity < 99) {
+					return { ...movie, quantity: movie.quantity + 1 }
+				}
+
+				return movie
+			})
+		)
+	}, [])
+
+	const decreaseMovieQuantityById = useCallback((movieId: number) => {
+		setMoviesInCart((prevState) =>
+			prevState.map((movie) => {
+				if (movie.id === movieId && movie.quantity > 1) {
+					return { ...movie, quantity: movie.quantity - 1 }
+				}
+
+				return movie
+			})
+		)
+	}, [])
+
+	const changeMovieQuantityById = useCallback(
+		(movieId: number, newQuantity: number) => {
+			setMoviesInCart((prevState) =>
+				prevState.map((movie) => {
+					if (movie.id === movieId) {
+						return { ...movie, quantity: newQuantity }
+					}
+					return movie
+				})
+			)
+		},
+		[]
+	)
+
+	const clearCart = useCallback(() => {
+		setMoviesInCart([])
+	}, [])
+
 	const context = useMemo(
 		() => ({
 			moviesInCart,
@@ -81,6 +127,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 			quantityMoviesInCart,
 			addMovieToCart,
 			removeMovieFromCart,
+			increaseMovieQuantityById,
+			decreaseMovieQuantityById,
+			changeMovieQuantityById,
+			clearCart,
 		}),
 		[
 			moviesInCart,
@@ -88,6 +138,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 			quantityMoviesInCart,
 			addMovieToCart,
 			removeMovieFromCart,
+			increaseMovieQuantityById,
+			decreaseMovieQuantityById,
+			changeMovieQuantityById,
+			clearCart,
 		]
 	)
 
