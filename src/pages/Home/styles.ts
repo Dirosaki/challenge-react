@@ -1,15 +1,9 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.main`
-	${({ theme }) => css`
-		margin: 0 auto;
-		padding: 0 1rem;
-		max-width: 46.75rem;
-
-		h1 {
-			color: ${theme.colors.white};
-		}
-	`}
+	margin: 0 auto;
+	padding: 0 1rem;
+	max-width: 46.75rem;
 `
 
 export const MoviesWrapper = styled.div`
